@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,14 +16,50 @@ import ChangeUserPassword from './pages/ChangeUserPassword';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [User, setUser] = useState({ employeeCode: '', password: '' });
+  const [User, setUser] = useState({ employeeCode: '' });
   const [Subject, setSubject] = useState({
-    _id: '678ce483cd76735183ab8342',
-    subjectCode: 'CSE221',
-    subjectName: 'Algorithm Design & Analysis',
-    department: 'CSE',
-    isElective: true,
+    _id: '',
+    subjectCode: '',
+    subjectName: '',
+    department: '',
+    isElective: false,
   });
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Check for authentication on page load/refresh
+  useEffect(() => {
+    const savedAuth = localStorage.getItem('isAuthenticated');
+    const savedUser = localStorage.getItem('user');
+    const savedSubject = localStorage.getItem('subject');
+    
+    if (savedAuth === 'true' && savedUser) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(savedUser));
+      if (savedSubject) {
+        setSubject(JSON.parse(savedSubject));
+      }
+    }
+    setIsLoading(false);
+  }, []);
+  
+  // Update localStorage when authentication state changes
+  useEffect(() => {
+    if (isAuthenticated) {
+      localStorage.setItem('isAuthenticated', 'true');
+      // Only store employeeCode, never store password
+      const userDataToStore = { employeeCode: User.employeeCode };
+      localStorage.setItem('user', JSON.stringify(userDataToStore));
+      localStorage.setItem('subject', JSON.stringify(Subject));
+    } else {
+      localStorage.removeItem('isAuthenticated');
+      localStorage.removeItem('user');
+      localStorage.removeItem('subject');
+    }
+  }, [isAuthenticated, User, Subject]);
+
+  if (isLoading) {
+    return null; // Or a loading spinner
+  }
 
   return (
     <div className="">
