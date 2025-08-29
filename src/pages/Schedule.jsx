@@ -5,7 +5,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
-import ScheduleSkeleton from "../components/ScheduleSkeleton";
+import Loader from "../components/Loader";
 import getProfessorTimetable from "../API.routes/timetable.api";
 
 // Move constant outside component to avoid recreation
@@ -96,7 +96,7 @@ export default function Schedule() {
 
         <div className="relative min-h-[120px]">
           {loading ? (
-            <ScheduleSkeleton />
+            <Loader />
           ) : scheduleData.length > 0 ? (
             scheduleData.map((item, index) => (
               <Link
