@@ -1,5 +1,5 @@
 {
-  "name": "IIITB Attendance App",
+  "name": "ATMS-NIT Bhopal",
   "short_name": "Attendance",
   "start_url": ".",
   "display": "standalone",
@@ -8,7 +8,7 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "logoSmall.png",
+      "src": "logo2.png",
       "sizes": "192x192",
       "type": "image/png"
     },

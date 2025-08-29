@@ -117,14 +117,14 @@ const Login = ({ setIsAuthenticated, setUser }) => {
             </button>
           </form>
 
-          <p className="mt-4 text-center text-sm text-gray-600">
+          {/* <p className="mt-4 text-center text-sm text-gray-600">
             Don’t have an account?{" "}
             <Link to="/signup" className="text-blue-500 hover:underline">Sign Up</Link>
-          </p>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          </p> */}
+          {/* <p className="mt-2 text-center text-sm text-gray-600">
             Forgot Password?{" "}
             <Link to="/change-password" className="text-blue-500 hover:underline">Reset Here</Link>
-          </p>
+          </p> */}
         </div>
       </div>
 
